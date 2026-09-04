@@ -7,6 +7,9 @@ async function getWeather(location) {
     let response = await fetch(
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${getUnit()}&key=3HJWGLW2FR7VJGCGAQPTM98S4&contentType=json`,
     );
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
     let json = await response.json();
     return json;
   } catch (err) {
